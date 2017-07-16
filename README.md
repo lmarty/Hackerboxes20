@@ -14,14 +14,19 @@ Install the Arduino IDE. Install the [espressif libraries](https://github.com/es
 
 ### Ultimate badge
 --TODO :
+#) WIFI sniffer logging to SD
+#) Bluetooth sniffer logging to SD
+#) Targeted WIFI deauth via menu of seen devices
+#) Asshole mode : mass deauth everthing. wifi and bluetooth.
+
 ### Defcon 25 Game
 --TODO :
-#) Auto spreading firmware : Use the OTA libs to search out other badges and update them to this FW.  You know, so they can play too
-#) Finish seen SSIDs logging
+#) Wormlike : Auto spreading firmware : Use wifi scanner to search out other badges and the OTA libs to update them to this FW.  You know, so they can play too
+#) Finish seen SSIDs logging to SD.  Works, but is ugly. add timestamp, mac, packet count, connection info, other data. 
 #) Implement "IT" feature : One person to start out as IT, pass a token to next seen.  Make display and LED's show IT status.
 #) Implement seen lightbar counter.  Light up green LEDs for first 5 seen, yellow for next, red for next, blue for next, rainbow for next.  As to visually display how many other badges you've come across at a glance.  make state persist across badge reboots
 #) Implement "Tagged" and "Hacker Found" freakout.  Make badge shit a chicken when it sees other hacker badges.  Throw a special fit when you get tagged as "IT"
-#) Implement GPG key exchange on contact.  : copy over yourEMAILaddy.gpg to badges found.  
+#) Implement GPG key exchange on contact.  : If gpg key exists on root of SD card, copy over to other badges found. Share secure contact info with other hax0rz.  
 #) Implement reset brains keypress seq : reset the badge to forget about game status and seen badges.  
 #) Implement USB hist mode : hold down keypad at boot to go into USB host mode.  Allowing transfer of files to SD.  
 #) Implement custom display pic and nametag code : show handle and avatar as part of badge loop
