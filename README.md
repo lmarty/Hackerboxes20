@@ -2,25 +2,19 @@
 Projects for the Hackerboxes #20 badge hardware
 
 ## What is this?
-This is a collection of projects for the [Hackerboxes](http://hackerboxes.com) Kit \#20 badge hardware.  The kit consists of an esp32 based "Dev Kit C" board, a nifty QVGA Color TFT LCD Display, a buzzer, 5 LEDs, 5 touch inputs and an SD_card slot.  For more information on the hardware platform, please see their [Instructables](https://www.instructables.com/id/HackerBoxes-0020-Summer-Camp/)  If you built the project to their specs, this should work like a champ for you.
+This is a collection of projects for the [Hackerboxes](http://hackerboxes.com) Kit \#20 badge hardware.  The kit consists of an esp32 based "Dev Kit C" board, a nifty QVGA Color TFT LCD Display, a buzzer, 5 LEDs, 5 touch inputs and an SD_card slot.  For more information on the hardware platform, please see their [Instructables](https://www.instructables.com/id/HackerBoxes-0020-Summer-Camp/)  If you built the project to their specs, this should work like a champ for you. The code is backwards compatible with the premise of the original demo, with the intention of extending it much further.  
 
-The projects rely on the espressif esp32 Arduino libraries located [HERE.](https://github.com/espressif/arduino-esp32)
+THE SD CARD WORKS IN THIS CODE!!!!
+
 
 ## Instructions
 
-Install the Arduino IDE. Install the [espressif libraries](https://github.com/espressif/arduino-esp32).  Install [nhatuan84's SD libraries](https://github.com/nhatuan84/esp32-micro-sdcard). Clone this repo down to your code folder and link the project dirs to ~/Documents/Arduino/<PROJECTNAME>.  
+Install the Arduino IDE.
+Install the [espressif libraries](https://github.com/espressif/arduino-esp32).
+Install [nhatuan84's SD libraries](https://github.com/nhatuan84/esp32-micro-sdcard).
+Clone this repo down to your code folder and link the project dirs to ~/Documents/Arduino/<PROJECTNAME>.  
 
 ## Projects
-
-### Ultimate badge
---TODO :
-#) WIFI sniffer logging to SD
-#) Bluetooth sniffer logging to SD
-#) Targeted WIFI deauth via menu of seen devices
-#) Asshole mode : mass deauth everthing. wifi and bluetooth.
-#) Targeted packet dump
-#) Raw packet dump
-
 
 ### Defcon 25 Game : INFECTED
 Tag based game.  Premise is to spread the disease while at DC.  Get it?  One badge will start out flashed as infected.  Others, willing hosts.  The infected badge will tag any non-infected badge it encounters, making that person effectively "IT".  Once you've passed on the disease, you can become infected again.  Just not from the same person you gave it too.  As the infection spreads, it passes wit it a list of badges/names it's spread from with it.  Giving the sense of the virus mutating, and allowing us to enforce the "cant get it from who you got it from" state. Get out there, get the infection, spread it to friends, get it again.  The person who catches the most mutations of the infection wins.  
@@ -82,6 +76,16 @@ make both badges beep and flash like mad till done.
 #) Implement AP gateway mode for badges.  Allowing a badge that is connected to the internet, via hotspot or otherwise, to allow other badges that connect to it's AP to get online for the purpose of making an MQTT connection to the scoring system
 
 
+### Ultimate badge
+--TODO :
+#) WIFI sniffer logging to SD
+#) Bluetooth sniffer logging to SD
+#) Targeted WIFI deauth via menu of seen devices
+#) Asshole mode : mass deauth everthing. wifi and bluetooth.
+#) Targeted packet dump
+#) Raw packet dump
+
+
 ### 3d Printed Case
 --TODO : Design a case for this thing
 
@@ -89,6 +93,8 @@ make both badges beep and flash like mad till done.
 for nes and other emus
 Add another button and update them to physicals vs the onboard touch
 
+### Contributing
+Fork me, branch me, PR me. We've got 2 weeks till showtime!
 
 
 ## Thank You!!
