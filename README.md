@@ -18,6 +18,9 @@ Install the Arduino IDE. Install the [espressif libraries](https://github.com/es
 #) Bluetooth sniffer logging to SD
 #) Targeted WIFI deauth via menu of seen devices
 #) Asshole mode : mass deauth everthing. wifi and bluetooth.
+#) Targeted packet dump
+#) Raw packet dump
+
 
 ### Defcon 25 Game : INFECTED
 Tag based game.  Premise is to spread the disease while at DC.  Get it?  One badge will start out flashed as infected.  Others, willing hosts.  The infected badge will tag any non-infected badge it encounters, making that person effectively "IT".  Once you've passed on the disease, you can become infected again.  Just not from the same person you gave it too.  As the infection spreads, it passes wit it a list of badges/names it's spread from with it.  Giving the sense of the virus mutating, and allowing us to enforce the "cant get it from who you got it from" state. Get out there, get the infection, spread it to friends, get it again.  The person who catches the most mutations of the infection wins.  
@@ -69,20 +72,22 @@ make both badges beep and flash like mad till done.
 #) Wormlike : Auto spreading firmware : Use wifi scanner to search out other badges and the OTA libs to update them to this FW.  You know, so they can play too
 #) Finish seen SSIDs logging to SD.  Works, but is ugly. add timestamp, mac, packet count, connection info, other data. Format as json.
 #) Implement "infected" feature : One person to start out as infected, pass the token to next seen.  Make display and LED's show infection status.
-#) Implement seen lightbar counter.  Light up green LEDs for first 5 seen, yellow for next, red for next, blue for next, rainbow for next.  As to visually display how many other badges you've come across at a glance.  make state persist across badge reboots
+#) Implement seen lightbar counter.  Light up green LEDs for first 5 seen, yellow for next, red for next, blue for next, rainbow for next.  As to visually display how many other badges you've come across at a glance. Overlap the colors as you count up. make state persist across badge reboots
 #) Implement "Tagged" and "Hacker Found" freakout.  Make badge shit a chicken when it sees other hacker badges.  Throw a special fit when you get infected.
 #) Implement GPG key exchange on contact.  : If gpg key exists on root of SD card, copy over to other badges found. Share secure contact info with other hax0rz.  
-#) Implement reset brains keypress seq : reset the badge to forget about game status and seen badges.  
+#) Implement reset brains keypress seq : reset the badge to forget about game status and seen badges on secret key hold pattern.  
 #) Implement USB host mode : hold down keypad button at boot to go into USB host mode.  Allowing transfer of files to SD.  
 #) Implement custom display pic and nametag code : show handle and avatar as part of badge loop
-# Implement MQTT scoring : If badge sees open wifi, establish MQTT connection to some online endpoint, and upload name and stats/score.  So we can keep track of the "winner"
+#) Implement MQTT scoring : If badge sees open wifi, establish MQTT connection to some online endpoint, and upload name and stats/score.  So we can keep track of the "winner"
+#) Implement AP gateway mode for badges.  Allowing a badge that is connected to the internet, via hotspot or otherwise, to allow other badges that connect to it's AP to get online for the purpose of making an MQTT connection to the scoring system
+
 
 ### 3d Printed Case
 --TODO : Design a case for this thing
 
-### Add another button / replace touch w/ contact buttons
+### Physical Button Upgrade
 for nes and other emus
-
+Add another button and update them to physicals vs the onboard touch
 
 
 
