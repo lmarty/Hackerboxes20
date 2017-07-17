@@ -19,13 +19,13 @@ Clone this repo down to your code folder and link the project dirs to ~/Document
 ## Projects
 
 ### Defcon 25 Game : INFECTED
-Tag based game.  Premise is to spread the disease while at DC.  Get it?  One badge will start out flashed as infected.  Others, willing hosts.  The infected badge will tag any non-infected badge it encounters, making that person effectively "IT".  Once you've passed on the disease, you can become infected again.  Just not from the same person you gave it too.  As the infection spreads, it passes wit it a list of badges/names it's spread from with it.  Giving the sense of the virus mutating, and allowing us to enforce the "cant get it from who you got it from" state. Get out there, get the infection, spread it to friends, get it again.  The person who catches the most mutations of the infection wins.
+Tag based game.  Premise is to spread the disease while at DC.  Infected. Hackers. Viruses. Defcon. Get it?  One badge will start out flashed as infected.  Others, willing hosts.  The infected badge will tag any non-infected badge it encounters, making that person effectively "IT".  Once you've passed on the disease, you can become infected again.  Just not from the same person you gave it too.  As the infection spreads, it passes wit it a list of badges/names it's spread from with it.  Giving the sense of the virus mutating, and allowing us to enforce the "cant get it from who you got it from" state. Get out there, get the infection, spread it to friends, get it again.  The person who catches the most mutations of the infection wins.
 
 
 Scoring :
-When the badge goes online, it connects and establishes a MQTT connnection to somewhere.  Should detect any open wifi and use that whenever possible for live scoring. First time connect, registers the badges info.  serial, mac addys, handle of the owner, infected state, permutations of the "virus". Any other info that sounds fun. If badge has infection info, that is uploaded as well.
+When the badge goes online, it connects and establishes a MQTT connnection to somewhere.  Should detect any open wifi and use that whenever possible for live scoring. First time connect, registers the badges info.  serial, mac addys, handle of the owner, infected state, permutations of the "virus". Any other info that sounds fun. Any connections after serve to update the score and upload permutations of the "infection".
 
-Info should be posted on a dynamic webpage.  Keeping track of players and count of infections caught.  Leaderboard style.  Most infections on top, all the way down.  Stats should be clickable for list of mutations caught.
+Info should be posted on a dynamic webpage.  Keeping track of players and count of infections caught.  Leaderboard style.  Most infections on top, all the way down.  Stats should be clickable for list of permutations caught.
 
 Infection file format:
 
@@ -33,14 +33,14 @@ JSON file containing the following info.  Grows as it passes.
 
 {
   Infected:
-    player: name
+    player: name+wifiMAC
       infected_state: Infected/Clean/prev_host
       Prev_infections: count
       transmitted_from: player name
       infection time: datestamp
       signature: transmitted_from:value::player:value
       badge_boottime: datestamp
-    player: name
+    player: name+wifiMAC
       infected_state: Infected/Clean/prev_host
       Prev_infections: count
       transmitted_from: player name
@@ -54,7 +54,7 @@ JSON file containing the following info.  Grows as it passes.
 
 Firmware and game status display :
 Badge should clearly show that it has the latest firmware.  Do this via an image and v.ID in the main loop.
-Badge should show infection state.  Use custom image in loop.  Red for infected, green for clean, blue for past hosts.
+Badge should show infection state.  Use custom image in loop.  Red for infected, green for clean, blue for past hosts, etc.
 
 
 Wormlike update function:
@@ -96,8 +96,10 @@ for nes and other emus
 Add another button and update them to physicals vs the onboard touch
 
 ### Contributing
-Fork me, branch me, PR me. We've got 2 weeks till showtime!
+Fork me, branch me, PR me. We've got 2 weeks till showtime!  YOUR IDEAS ARE VALUABLE!!!! Even if you cant code, contribute your thoughts through issues and pull requests.  Let's make this an entertaining game for everyone.  #Badgelife on twitter has some inspiration too.  No contributions will go unheard.  This is open source and driven by the community. Band together, build fast!
 
 
 ## Thank You!!
 SD Card support is provided by libraries coded by [nhatuan84](https://github.com/nhatuan84) Thanks dude! You saved me tons of frustration.
+
+iotsharing.com also provided some inspiration, and the link to the SD fix.  Thanks to you as well!
