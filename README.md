@@ -52,31 +52,38 @@ JSON file containing the following info.  Grows as it passes.
 
 
 
-}
-Firmware and game status:
-Badge should clearly show that it has the latest firmware.  Do this via an image a v. ID in the main loop.  
+
+Firmware and game status display :
+Badge should clearly show that it has the latest firmware.  Do this via an image and v.ID in the main loop.  
 Badge should show infection state.  Use custom image in loop.  Red for infected, green for clean, blue for past hosts.
 
 
 Wormlike update function:
-badge should update any other badges it encounters that are below its current version
+badge should update any other badges it encounters that are below its current version. Look for hackerboxer SSID, check ver.  if [remote_ver < our_ver ] then; initiate update.
+
 Current FW badge should indicate it is updating another badge.  
 Old FW badge being updated should show its status as being updated, so owner doesnt leave range.
+make both badges beep and flash like mad till done.
 
 --TODO :
 #) Wormlike : Auto spreading firmware : Use wifi scanner to search out other badges and the OTA libs to update them to this FW.  You know, so they can play too
-#) Finish seen SSIDs logging to SD.  Works, but is ugly. add timestamp, mac, packet count, connection info, other data.
-#) Implement "IT" feature : One person to start out as IT, pass a token to next seen.  Make display and LED's show IT status.
+#) Finish seen SSIDs logging to SD.  Works, but is ugly. add timestamp, mac, packet count, connection info, other data. Format as json.
+#) Implement "infected" feature : One person to start out as infected, pass the token to next seen.  Make display and LED's show infection status.
 #) Implement seen lightbar counter.  Light up green LEDs for first 5 seen, yellow for next, red for next, blue for next, rainbow for next.  As to visually display how many other badges you've come across at a glance.  make state persist across badge reboots
-#) Implement "Tagged" and "Hacker Found" freakout.  Make badge shit a chicken when it sees other hacker badges.  Throw a special fit when you get tagged as "IT"
+#) Implement "Tagged" and "Hacker Found" freakout.  Make badge shit a chicken when it sees other hacker badges.  Throw a special fit when you get infected.
 #) Implement GPG key exchange on contact.  : If gpg key exists on root of SD card, copy over to other badges found. Share secure contact info with other hax0rz.  
 #) Implement reset brains keypress seq : reset the badge to forget about game status and seen badges.  
-#) Implement USB hist mode : hold down keypad at boot to go into USB host mode.  Allowing transfer of files to SD.  
+#) Implement USB host mode : hold down keypad button at boot to go into USB host mode.  Allowing transfer of files to SD.  
 #) Implement custom display pic and nametag code : show handle and avatar as part of badge loop
 # Implement MQTT scoring : If badge sees open wifi, establish MQTT connection to some online endpoint, and upload name and stats/score.  So we can keep track of the "winner"
 
 ### 3d Printed Case
---TODO :
+--TODO : Design a case for this thing
+
+### Add another button / replace touch w/ contact buttons
+for nes and other emus
+
+
 
 
 ## Thank You!!
