@@ -1,25 +1,33 @@
+//////////////////////////////////////////////////////////////////
+// Change Log
+//
+// 15 JUN 2017 - Initial Rev. A for HackerBox guide
+// 10 JUL 2017 - replaced beep() with post from sconklin
+// 12 JUL 2017 - added BitHead graphic to LCD functionality
+// 15 JUL 2017 - clean up display text a little
+// 15 JUL 2017 - default to muted stated
+// 15 JUL 2017 - dislplay mute indicator on upper left of screen
+// 15 JUL 2017 - tighten timing loops for more "entertainment"
 
 
-#include <mySD.h>
 #include "WiFi.h"
 #include "SPI.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
-#include "Adafruit_NeoPixel.h"
+#include <Adafruit_NeoPixel.h>
 
-//DEVICES
-// TFT Values
-#define TFT_CS   19
-#define TFT_DC   22
-#define TFT_MOSI 23
-#define TFT_CLK  26
-#define TFT_RST  21
-#define TFT_MISO 25
+// TFT Display Pins
+#define TFT_CS    19
+#define TFT_DC    22
+#define TFT_MOSI  23
+#define TFT_CLK   26
+#define TFT_RST   21
+#define TFT_MISO  25
 
-//NEOPIXEL Values
-#define PIXELPIN  5
-#define NUMPIXELS 5
-#define pixlux   20
+// NeoPixel Values
+#define PIXELPIN   5
+#define NUMPIXELS  5
+#define pixlux    20  //saturation level for NeoPixels colors
 
 // Audio Buzzer Values
 const int buzzerPin = 18;
@@ -40,149 +48,61 @@ const int e7 = 2637;
 const int f7 = 2794;
 const int g7 = 3136;
 
-// init the display and leds
+int muted = true;
+char ssid[]="HackerBoxer_HoneyBadgeR";  //put your handle after the underscore
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIXELPIN, NEO_GRB + NEO_KHZ800);
-
-// setup our game variables
 char hackers_found[13][70];
 int next_hacker_found = 0;
-int mute_touched = false;
-char ssid[]="HackerBoxer_MrmuthafuckinE";  //put your handle after the underscore
-int muted = true; // default to muted
 unsigned long debounce;
 
-
-
-// setup our sd card object
-File root;
-
-// run our main setup function
-void setup()
+void setup() 
 {
   debounce = millis();
-  Serial.begin(115200);
-  Serial.println("Firing up our setup function");
-  Serial.print("Initializing SD card...");
-
-  /* initialize SD library with SPI pins */
-  if (!SD.begin(17, 16, 4, 0)) {
-    Serial.println("initialization failed!");
-    return;
-  }
-  Serial.println("initialization done.");
-
-  /* load the root object with the contents of the filesystem "/" */
-  root = SD.open("/");
-  if (root) {
-    printDirectory(root, 0);
-    root.close();
-  } else {
-    Serial.println("error opening root FS.. we can likely recover");
-  }
-
-
-  delay(1000);
-  /* open our seen ssids file and read it out on the serial */
-  root = SD.open("seen.txt");
-  if (root) {
-    /* read from the file until there's nothing else in it */
-    Serial.println("All the SSIDs in seen.txt");
-    while (root.available()) {
-      /* read the file and print to Terminal */
-      Serial.write(root.read());
-    }
-    root.close();
-  } else {
-    Serial.println("error opening seen.txt from line91");
-  }
-
-    // start the screen
   tft.begin();
   tft.setRotation(3); // rotate 3*(pi/2)
-
-  //GFX lib start for the leds
   pixels.begin();
-
-  // Set our buzzer pin as an OUTPUT
   pinMode(buzzerPin, OUTPUT);
-
-  // hacker count array. Loop through till we hit the linelimit of the screen using this font.
-  for (int i = 0; i<13; i++)
-  {
+  for (int i; i<13; i++)
     hackers_found[i][0] = 0; //empty array of strings
-    touchAttachInterrupt(15, mutebutton, 40);  //threshold 40. why is this in this loop? TODO: Investigate
-  }
+  touchAttachInterrupt(15, mutebutton, 40);  //threshold 40
 }
 
-void loop()
+void loop() 
 {
   // display BitHead HackerBoxes Mascot
   BitHead2LCD();
-
   // cycle some NeoPixel Rainbows
   RainbowLEDcycle(17);
-
   // scan other SSIDs
   wifiScan2LCD();
-
   // cycle some NeoPixel Rainbows
-  RainbowLEDcycle(18);
-
-  // start broadcating SSID (AP on)
   WiFi.softAP(ssid, NULL, 1, 0, 1);
-
-  // Play Mario Theme on Buzzer TODO : Fix this
-//  mute_handler();
-//  if (!muted)
-//    MarioTheme();
-
+  // Play Mario Theme on Buzzer
+  RainbowLEDcycle(17);  
+  // start broadcating SSID (AP on)
+  if (!muted)
+    MarioTheme();
   // chill here for a while
-  delay(10000);
-
+  delay(3000);
   //diplay list of found hackers tagged
   found2LCD();
-
-  // cycle some NeoPixel Blues
-  BlueLEDcycle(18);
-
-  // Play Imperial March on Buzzer TODO : fix this
-//  mute_handler();
-//  if (!muted)
-//    ImperialMarch();
-
+  // cycle some NeoPixel Rainbows
+  RainbowLEDcycle(17);
+  // Play Imperial March on Buzzer
+  if (!muted)
+    ImperialMarch();
   // chill here for a while
-  delay(10000);
-
-  // stop broadcating SSID (AP off)
+  delay(3000);
+  // stop broadcating SSID (AP off)  
   WiFi.softAPdisconnect(1);
 }
 
-//
-// OUR FUNCTIONS
-//
-
-void mute_handler() // if the mut button has been touched, flip variable
-{
-  if (mute_touched)
-  {
-    if (muted)
-    {
-      muted = false;
-    }
-    else
-    {
-      muted = true;
-    }
-    mute_touched = false;
-  }
-}
-
-void wifiScan2LCD()
+void wifiScan2LCD() 
 {
   int netsfound;
   int displaylines=13;
-
+  
   tft.fillScreen(ILI9341_BLACK);
   paint_mute_indicator();
   tft.setCursor(0, 0);
@@ -200,13 +120,13 @@ void wifiScan2LCD()
       tft.println(". . .");
       displaylines--;
     }
-    for (int i = 0; i < netsfound; ++i)
+    for (int i = 0; i < netsfound; ++i) 
     {
       if (WiFi.SSID(i).startsWith("HackerBoxer"))
       {
         WiFi.SSID(i).toCharArray(hackers_found[next_hacker_found],70);
         hackers_found[next_hacker_found][25] = 0;  //truncate for display
-        next_hacker_found++;
+        next_hacker_found++; 
         if (next_hacker_found == 13)
           next_hacker_found = 0;
       }
@@ -220,137 +140,156 @@ void wifiScan2LCD()
         tft.println((WiFi.encryptionType(i) == WIFI_AUTH_OPEN)?" ":"*");
         delay(50);
         displaylines--;
-        // LOG our findings TODO : Break out to its own function
-        //Open the seen file
-        root = SD.open("seen.txt", FILE_WRITE);
-        // if the file is available, write to it TODO : Only write first encounter info, do not log the same again for 5 mins.
-        if (root) {
-          root.print(" [");
-          root.print(netsfound);
-          root.println("] ");
-          root.print(" [");
-          root.print(WiFi.RSSI(i));
-          root.println("] ");
-          root.println(WiFi.SSID(i).substring(0,17));
-          root.println(WiFi.encryptionType(i));
-          root.close();
-        }
       }
     }
+    delay(700); // Wait before scanning again
   }
 }
 
-// Our funtion to loop throught the filesystem and print index to serial
-void printDirectory(File dir, int numTabs) {
-
-  while(true) {
-     File entry =  dir.openNextFile();
-     if (! entry) {
-       break;
-     }
-     for (uint8_t i=0; i<numTabs; i++) {
-       Serial.print('\t');   // we'll have a nice indentation
-     }
-     // Print the name
-     Serial.print(entry.name());
-     /* Recurse for directories, otherwise print the file size */
-     if (entry.isDirectory()) {
-       Serial.println("/");
-       printDirectory(entry, numTabs+1);
-     } else {
-       /* files have sizes, directories do not */
-       Serial.print("\t\t");
-       Serial.println(entry.size());
-     }
-     entry.close();
-   }
-}
-
-
-void found2LCD()
+void found2LCD() 
 {
   tft.fillScreen(ILI9341_BLACK);
   paint_mute_indicator();
   tft.setCursor(0, 0);
   tft.setTextColor(ILI9341_YELLOW);
   tft.setTextSize(4);
-  tft.println(" TAG ur iT");
+  tft.println(" Hacker Tags");
   tft.setTextColor(ILI9341_RED);
   tft.setTextSize(2);
   for (int i=0; i<13; i++)
   {
     tft.print(" ");
-    tft.println(hackers_found[i]+12);
-    Serial.println(hackers_found[i]+12);
+    tft.println(hackers_found[i]+12); //+12 to removed "HackerBoxer_"
   }
 }
 
-// setup led funcs
 void RainbowLEDcycle(int cycles)
 {
   int i=0;
-  while(cycles)
-  {
-//    pixels.setPixelColor(i, pixels.Color(pixlux,0,0));
+  while(cycles) 
+  { 
+    pixels.setPixelColor(i, pixels.Color(pixlux,0,0));
     i = (i==4) ? 0 : (i+1);
-//    pixels.setPixelColor(i, pixels.Color(pixlux,pixlux,0));
+    pixels.setPixelColor(i, pixels.Color(pixlux,pixlux,0));
     i = (i==4) ? 0 : (i+1);
-//    pixels.setPixelColor(i, pixels.Color(0,pixlux,0));
+    pixels.setPixelColor(i, pixels.Color(0,pixlux,0));
     i = (i==4) ? 0 : (i+1);
-//    pixels.setPixelColor(i, pixels.Color(0,0,pixlux));
+    pixels.setPixelColor(i, pixels.Color(0,0,pixlux));
     i = (i==4) ? 0 : (i+1);
-//    pixels.setPixelColor(i, pixels.Color(pixlux,0,pixlux));
+    pixels.setPixelColor(i, pixels.Color(pixlux,0,pixlux));
     i = (i==4) ? 0 : (i+1);
     i = (i==4) ? 0 : (i+1);
-//    pixels.show();
+    pixels.show();
     delay(150);
     cycles--;
   }
 }
 
-void BlueLEDcycle(int cycles)
+void beep(int tone, int duration)
 {
-  int i=0;
-  while(cycles)
+  int noteDelay = int(500000.0/tone);
+  
+  for (float i = 0.0; i < float(duration/1000.0); i += (1.0/tone))
   {
-//    pixels.setPixelColor(i, pixels.Color(0,0,pixlux*2));
-    i = (i==4) ? 0 : (i+1);
-//    pixels.setPixelColor(i, pixels.Color(0,0,pixlux/2));
-    i = (i==4) ? 0 : (i+1);
-//    pixels.setPixelColor(i, pixels.Color(0,0,pixlux/2));
-    i = (i==4) ? 0 : (i+1);
-//    pixels.setPixelColor(i, pixels.Color(0,0,pixlux/2));
-    i = (i==4) ? 0 : (i+1);
- //   pixels.setPixelColor(i, pixels.Color(0,0,pixlux/2));
-    i = (i==4) ? 0 : (i+1);
-    i = (i==4) ? 0 : (i+1);
-//    pixels.show();
-    delay(150);
-    cycles--;
+    digitalWrite(buzzerPin, HIGH);
+    delayMicroseconds(noteDelay);
+    digitalWrite(buzzerPin, LOW);
+    delayMicroseconds(noteDelay);
   }
+  delay(30);
 }
 
-//  changes state as pad is touched
+ 
+void  ImperialMarch()
+{
+  beep(a, 500);
+  beep(a, 500);    
+  beep(a, 500);
+  beep(f, 350);
+  beep(cH, 150);  
+  beep(a, 500);
+  beep(f, 350);
+  beep(cH, 150);
+  beep(a, 650);
+  delay(500);
+  beep(eH, 500);
+  beep(eH, 500);
+  beep(eH, 500);  
+  beep(fH, 350);
+  beep(cH, 150);
+  beep(gS, 500);
+  beep(f, 350);
+  beep(cH, 150);
+  beep(a, 650);
+}
+
+void  MarioTheme()
+{
+  beep(e7,150);
+  beep(e7,150);
+  delay(150);
+  beep(e7,150);  
+  delay(150);
+  beep(c7,150);
+  beep(e7,150);
+  delay(150);
+  beep(g7,150);
+  delay(450);
+  beep(g6,150);
+  delay(450);
+  beep(c7,150);
+  delay(300);
+  beep(g6,150);
+  delay(300);
+  beep(e6,150);
+  delay(300);
+  beep(a6,150);
+  delay(150);
+  beep(b6,150);
+  delay(150);
+  beep(as6,150);
+  beep(a6,150);
+  delay(150);
+  beep(g6,112);
+  beep(e7,112); 
+  beep(g7,112);
+  beep(a6,150);
+  delay(150);
+  beep(f7,150);
+  beep(g7,150);
+  delay(150);
+  beep(e7,150);
+  delay(150); 
+  beep(c7,150);
+  beep(d7,150);
+  beep(b6,150);
+}
+
 void mutebutton()
 {
   if ((millis() - debounce) > 100)
   {
     debounce = millis();
-    if (muted)  {
+    if (muted)
+    {
       muted = false;
     }
-    else {
+    else
+    {
       muted = true;
     }
   paint_mute_indicator();
   }
 }
 
-void paint_mute_indicator() {
-  if (muted) {
+void paint_mute_indicator()
+{
+  if (muted)
+  {
     tft.fillRect(0, 0, 18, 18, ILI9341_RED);
   }
-  else {
+  else
+  {
     tft.fillRect(0, 0, 18, 18, ILI9341_GREEN);
   }
 }
@@ -508,7 +447,7 @@ char *bithead[] = {
 
 const int bithead_width = 131;
 const int bithead_height = 147;
-
+    
   tft.fillScreen(ILI9341_BLACK);
   paint_mute_indicator();
   tft.setCursor(0, 0);
@@ -521,9 +460,11 @@ const int bithead_height = 147;
     for (int x=0; x < bithead_width; x++)
     {
       if (bithead[y][x] == '1')
-      {
+      { 
         tft.drawPixel(x+100, y+55, ILI9341_YELLOW);
       }
     }
   }
 }
+
+

@@ -2,7 +2,9 @@
 Projects for the Hackerboxes #20 badge hardware
 
 ## What is this?
-This is a collection of projects for the [Hackerboxes](http://hackerboxes.com) Kit \#20 badge hardware.  The kit consists of an esp32 based "Dev Kit C" board, a nifty QVGA Color TFT LCD Display, a buzzer, 5 LEDs, 5 touch inputs and an SD_card slot.  For more information on the hardware platform, please see their [Instructables](https://www.instructables.com/id/HackerBoxes-0020-Summer-Camp/)  If you built the project to their specs, this should work like a champ for you. The code is backwards compatible with the premise of the original demo, with the intention of extending it much further.  
+This is a collection of projects for the [Hackerboxes](http://hackerboxes.com) Kit \#20 badge hardware.  The kit consists of an esp32 based "Dev Kit C" board, a nifty QVGA Color TFT LCD Display, a buzzer, 5 LEDs, 5 touch inputs and an SD_card slot.  For more information on the hardware platform, please see their [Instructables](https://www.instructables.com/id/HackerBoxes-0020-Summer-Camp/)  If you built the project to their specs, this should work like a champ for you. The code is backwards compatible with the premise of the original demo, with the intention of extending it much further.
+
+To get your own kit, and other awesome projects in the mail each month, be sure to get signed up for a Hackerbox subscription at [www.hackerboxes.com](http://www.hackerboxes.com)
 
 THE SD CARD WORKS IN THIS CODE!!!!
 
@@ -17,28 +19,28 @@ THE SD CARD WORKS IN THIS CODE!!!!
 ## Projects
 
 ### Defcon 25 Game : INFECTED
-Tag based game.  Premise is to spread the disease while at DC.  Get it?  One badge will start out flashed as infected.  Others, willing hosts.  The infected badge will tag any non-infected badge it encounters, making that person effectively "IT".  Once you've passed on the disease, you can become infected again.  Just not from the same person you gave it too.  As the infection spreads, it passes wit it a list of badges/names it's spread from with it.  Giving the sense of the virus mutating, and allowing us to enforce the "cant get it from who you got it from" state. Get out there, get the infection, spread it to friends, get it again.  The person who catches the most mutations of the infection wins.  
+Tag based game.  Premise is to spread the disease while at DC.  Infected. Hackers. Viruses. Defcon. Get it?  One badge will start out flashed as infected.  Others, willing hosts.  The infected badge will tag any non-infected badge it encounters, making that person effectively "IT".  Once you've passed on the disease, you can become infected again.  Just not from the same person you gave it too.  As the infection spreads, it passes wit it a list of badges/names it's spread from with it.  Giving the sense of the virus mutating, and allowing us to enforce the "cant get it from who you got it from" state. Get out there, get the infection, spread it to friends, get it again.  The person who catches the most mutations of the infection wins.
 
 
 Scoring :
-When the badge goes online, it connects and establishes a MQTT connnection to somewhere.  Should detect any open wifi and use that whenever possible for live scoring. First time connect, registers the badges info.  serial, mac addys, handle of the owner, infected state, permutations of the "virus". Any other info that sounds fun. If badge has infection info, that is uploaded as well.   
+When the badge goes online, it connects and establishes a MQTT connnection to somewhere.  Should detect any open wifi and use that whenever possible for live scoring. First time connect, registers the badges info.  serial, mac addys, handle of the owner, infected state, permutations of the "virus". Any other info that sounds fun. Any connections after serve to update the score and upload permutations of the "infection".
 
-Info should be posted on a dynamic webpage.  Keeping track of players and count of infections caught.  Leaderboard style.  Most infections on top, all the way down.  Stats should be clickable for list of mutations caught.  
+Info should be posted on a dynamic webpage.  Keeping track of players and count of infections caught.  Leaderboard style.  Most infections on top, all the way down.  Stats should be clickable for list of permutations caught.
 
 Infection file format:
 
 JSON file containing the following info.  Grows as it passes.
-
+'''
 {
   Infected:
-    player: name
+    player: name+wifiMAC
       infected_state: Infected/Clean/prev_host
       Prev_infections: count
       transmitted_from: player name
       infection time: datestamp
       signature: transmitted_from:value::player:value
       badge_boottime: datestamp
-    player: name
+    player: name+wifiMAC
       infected_state: Infected/Clean/prev_host
       Prev_infections: count
       transmitted_from: player name
@@ -46,23 +48,24 @@ JSON file containing the following info.  Grows as it passes.
       signature: transmitted_from:value::player:value
     ...
   }
-
+'''
 
 
 
 Firmware and game status display :
-Badge should clearly show that it has the latest firmware.  Do this via an image and v.ID in the main loop.  
-Badge should show infection state.  Use custom image in loop.  Red for infected, green for clean, blue for past hosts.
+Badge should clearly show that it has the latest firmware.  Do this via an image and v.ID in the main loop.
+Badge should show infection state.  Use custom image in loop.  Red for infected, green for clean, blue for past hosts, etc.
 
 
 Wormlike update function:
 badge should update any other badges it encounters that are below its current version. Look for hackerboxer SSID, check ver.  if [remote_ver < our_ver ] then; initiate update.
 
-Current FW badge should indicate it is updating another badge.  
+Current FW badge should indicate it is updating another badge.
 Old FW badge being updated should show its status as being updated, so owner doesnt leave range.
 make both badges beep and flash like mad till done.
 
 --TODO :
+<<<<<<< HEAD
 1. Wormlike : Auto spreading firmware : Use wifi scanner to search out other badges and the OTA libs to update them to this FW.  You know, so they can play too
 1. Finish seen SSIDs logging to SD.  Works, but is ugly. add timestamp, mac, packet count, connection info, other data. Format as json.
 1. Implement "infected" feature : One person to start out as infected, pass the token to next seen.  Make display and LED's show infection status.
@@ -94,8 +97,8 @@ for nes and other emus
 Add another button and update them to physicals vs the onboard touch
 
 ### Contributing
-Fork me, branch me, PR me. We've got 2 weeks till showtime!
+Fork me, branch me, PR me. We've got 2 weeks till showtime!  YOUR IDEAS ARE VALUABLE!!!! Even if you cant code, contribute your thoughts through issues and pull requests.  Let's make this an entertaining game for everyone.  #Badgelife on twitter has some inspiration too.  No contributions will go unheard.  This is open source and driven by the community. Band together, build fast!
 
 
 ## Thank You!!
-SD Card support is provided by libraries coded by [nhatuan84](https://github.com/nhatuan84) Thanks dude! You saved me tons of frustration.  
+SD Card support is provided by libraries coded by [nhatuan84](https://github.com/nhatuan84) Thanks dude! You saved me tons of frustration.
