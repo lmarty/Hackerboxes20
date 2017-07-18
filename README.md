@@ -9,10 +9,10 @@ THE SD CARD WORKS IN THIS CODE!!!!
 
 ## Instructions
 
-Install the Arduino IDE.
-Install the [espressif libraries](https://github.com/espressif/arduino-esp32).
-Install [nhatuan84's SD libraries](https://github.com/nhatuan84/esp32-micro-sdcard).
-Clone this repo down to your code folder and link the project dirs to ~/Documents/Arduino/<PROJECTNAME>.  
+* Install the Arduino IDE.
+* Install the [espressif libraries](https://github.com/espressif/arduino-esp32).
+* Install [nhatuan84's SD libraries](https://github.com/nhatuan84/esp32-micro-sdcard).
+* Clone this repo down to your code folder and link the project dirs to ~/Documents/Arduino/<PROJECTNAME>.  
 
 ## Projects
 
@@ -63,27 +63,27 @@ Old FW badge being updated should show its status as being updated, so owner doe
 make both badges beep and flash like mad till done.
 
 --TODO :
-#) Wormlike : Auto spreading firmware : Use wifi scanner to search out other badges and the OTA libs to update them to this FW.  You know, so they can play too
-#) Finish seen SSIDs logging to SD.  Works, but is ugly. add timestamp, mac, packet count, connection info, other data. Format as json.
-#) Implement "infected" feature : One person to start out as infected, pass the token to next seen.  Make display and LED's show infection status.
-#) Implement seen lightbar counter.  Light up green LEDs for first 5 seen, yellow for next, red for next, blue for next, rainbow for next.  As to visually display how many other badges you've come across at a glance. Overlap the colors as you count up. make state persist across badge reboots
-#) Implement "Tagged" and "Hacker Found" freakout.  Make badge shit a chicken when it sees other hacker badges.  Throw a special fit when you get infected.
-#) Implement GPG key exchange on contact.  : If gpg key exists on root of SD card, copy over to other badges found. Share secure contact info with other hax0rz.  
-#) Implement reset brains keypress seq : reset the badge to forget about game status and seen badges on secret key hold pattern.  
-#) Implement USB host mode : hold down keypad button at boot to go into USB host mode.  Allowing transfer of files to SD.  
-#) Implement custom display pic and nametag code : show handle and avatar as part of badge loop
-#) Implement MQTT scoring : If badge sees open wifi, establish MQTT connection to some online endpoint, and upload name and stats/score.  So we can keep track of the "winner"
-#) Implement AP gateway mode for badges.  Allowing a badge that is connected to the internet, via hotspot or otherwise, to allow other badges that connect to it's AP to get online for the purpose of making an MQTT connection to the scoring system
+1. Wormlike : Auto spreading firmware : Use wifi scanner to search out other badges and the OTA libs to update them to this FW.  You know, so they can play too
+1. Finish seen SSIDs logging to SD.  Works, but is ugly. add timestamp, mac, packet count, connection info, other data. Format as json.
+1. Implement "infected" feature : One person to start out as infected, pass the token to next seen.  Make display and LED's show infection status.
+1. Implement seen lightbar counter.  Light up green LEDs for first 5 seen, yellow for next, red for next, blue for next, rainbow for next.  As to visually display how many other badges you've come across at a glance. Overlap the colors as you count up. make state persist across badge reboots
+1. Implement "Tagged" and "Hacker Found" freakout.  Make badge shit a chicken when it sees other hacker badges.  Throw a special fit when you get infected.
+1. Implement GPG key exchange on contact.  : If gpg key exists on root of SD card, copy over to other badges found. Share secure contact info with other hax0rz.  
+1. Implement reset brains keypress seq : reset the badge to forget about game status and seen badges on secret key hold pattern.  
+1. Implement USB host mode : hold down keypad button at boot to go into USB host mode.  Allowing transfer of files to SD.  
+1. Implement custom display pic and nametag code : show handle and avatar as part of badge loop
+1. Implement MQTT scoring : If badge sees open wifi, establish MQTT connection to some online endpoint, and upload name and stats/score.  So we can keep track of the "winner"
+1. Implement AP gateway mode for badges.  Allowing a badge that is connected to the internet, via hotspot or otherwise, to allow other badges that connect to it's AP to get online for the purpose of making an MQTT connection to the scoring system
 
 
 ### Ultimate badge
 --TODO :
-#) WIFI sniffer logging to SD
-#) Bluetooth sniffer logging to SD
-#) Targeted WIFI deauth via menu of seen devices
-#) Asshole mode : mass deauth everthing. wifi and bluetooth.
-#) Targeted packet dump
-#) Raw packet dump
+1. WIFI sniffer logging to SD
+1. Bluetooth sniffer logging to SD
+1. Targeted WIFI deauth via menu of seen devices
+1. Asshole mode : mass deauth everthing. wifi and bluetooth.
+1. Targeted packet dump
+1. Raw packet dump
 
 
 ### 3d Printed Case
