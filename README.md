@@ -14,7 +14,11 @@ THE SD CARD WORKS IN THIS CODE!!!!
 * Install the Arduino IDE.
 * Install the [espressif libraries](https://github.com/espressif/arduino-esp32).
 * Install [nhatuan84's SD libraries](https://github.com/nhatuan84/esp32-micro-sdcard).
-* Clone this repo down to your code folder and link the project dirs to ~/Documents/Arduino/<PROJECTNAME>.  
+* Clone this repo down to your code folder and link the project dirs to ~/Documents/Arduino/<PROJECTNAME>.
+
+IF THE SD ISN'T WORKING...
+* try holding down the flash button on the dev kit board as you boot
+* If that fixes it... Pop your TFT board off the project PCB and flip it over.  There are two small pads labled "j1" on the back, solder them together. 
 
 ## Projects
 
@@ -70,9 +74,9 @@ make both badges beep and flash like mad till done.
 1. Implement "infected" feature : One person to start out as infected, pass the token to next seen.  Make display and LED's show infection status.
 1. Implement seen lightbar counter.  Light up green LEDs for first 5 seen, yellow for next, red for next, blue for next, rainbow for next.  As to visually display how many other badges you've come across at a glance. Overlap the colors as you count up. make state persist across badge reboots
 1. Implement "Tagged" and "Hacker Found" freakout.  Make badge shit a chicken when it sees other hacker badges.  Throw a special fit when you get infected.
-1. Implement GPG key exchange on contact.  : If gpg key exists on root of SD card, copy over to other badges found. Share secure contact info with other hax0rz.  
-1. Implement reset brains keypress seq : reset the badge to forget about game status and seen badges on secret key hold pattern.  
-1. Implement USB host mode : hold down keypad button at boot to go into USB host mode.  Allowing transfer of files to SD.  
+1. Implement GPG key exchange on contact.  : If gpg key exists on root of SD card, copy over to other badges found. Share secure contact info with other hax0rz.
+1. Implement reset brains keypress seq : reset the badge to forget about game status and seen badges on secret key hold pattern.
+1. Implement USB host mode : hold down keypad button at boot to go into USB host mode.  Allowing transfer of files to SD.
 1. Implement custom display pic and nametag code : show handle and avatar as part of badge loop
 1. Implement MQTT scoring : If badge sees open wifi, establish MQTT connection to some online endpoint, and upload name and stats/score.  So we can keep track of the "winner"
 1. Implement AP gateway mode for badges.  Allowing a badge that is connected to the internet, via hotspot or otherwise, to allow other badges that connect to it's AP to get online for the purpose of making an MQTT connection to the scoring system
