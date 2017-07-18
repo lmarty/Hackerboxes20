@@ -96,7 +96,7 @@ for nes and other emus
 Add another button and update them to physicals vs the onboard touch
 
 ### Contributing
-Fork me, branch me, PR me. We've got 2 weeks till showtime!  YOUR IDEAS ARE VALUABLE!!!! Even if you cant code, contribute your thoughts through issues and pull requests.  Let's make this an entertaining game for everyone.  #Badgelife on twitter has some inspiration too.  No contributions will go unheard.  This is open source and driven by the community. Band together, build fast!
+Fork me, branch me, PR me. We've got 2 weeks till showtime!  YOUR IDEAS ARE VALUABLE!!!! Even if you cant code, contribute your thoughts through issues and pull requests.  Let's make this an entertaining game for everyone.  #Badgelife on twitter has some inspiration too.  No contributions will go unheard.  This is open source and driven by the community. Band together, build fast!  Grab something off the board at https://github.com/lmarty/Hackerboxes20/projects/1
 
 
 ## Thank You!!
