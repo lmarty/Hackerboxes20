@@ -65,7 +65,6 @@ Old FW badge being updated should show its status as being updated, so owner doe
 make both badges beep and flash like mad till done.
 
 --TODO :
-<<<<<<< HEAD
 1. Wormlike : Auto spreading firmware : Use wifi scanner to search out other badges and the OTA libs to update them to this FW.  You know, so they can play too
 1. Finish seen SSIDs logging to SD.  Works, but is ugly. add timestamp, mac, packet count, connection info, other data. Format as json.
 1. Implement "infected" feature : One person to start out as infected, pass the token to next seen.  Make display and LED's show infection status.
