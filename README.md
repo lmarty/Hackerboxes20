@@ -72,7 +72,7 @@ make both badges beep and flash like mad till done.
 1. Wormlike : Auto spreading firmware : Use wifi scanner to search out other badges and the OTA libs to update them to this FW.  You know, so they can play too
 1. Finish seen SSIDs logging to SD.  Works, but is ugly. add timestamp, mac, packet count, connection info, other data. Format as json.
 1. Implement "infected" feature : One person to start out as infected, pass the token to next seen.  Make display and LED's show infection status.
-1. Implement seen lightbar counter.  Light up green LEDs for first 5 seen, yellow for next, red for next, blue for next, rainbow for next.  As to visually display how many other badges you've come across at a glance. Overlap the colors as you count up. make state persist across badge reboots
+1. Implement seen lightbar counter.  scoring seq should start blank(off).  Light up green LEDs across the bar, left to right. For first 5 seen. Yellow for next, red for next, blue for next, rainbow for next.  As to visually display how many other badges you've come across at a glance. Overlap the colors as you count up. make state persist across badge reboots. incorporate into main loop.
 1. Implement "Tagged" and "Hacker Found" freakout.  Make badge shit a chicken when it sees other hacker badges.  Throw a special fit when you get infected.
 1. Implement GPG key exchange on contact.  : If gpg key exists on root of SD card, copy over to other badges found. Share secure contact info with other hax0rz.
 1. Implement reset brains keypress seq : reset the badge to forget about game status and seen badges on secret key hold pattern.
@@ -84,10 +84,11 @@ make both badges beep and flash like mad till done.
 
 ### Ultimate badge
 --TODO :
+1. Graphic boot menu for all the below 
 1. WIFI sniffer logging to SD
 1. Bluetooth sniffer logging to SD
 1. Targeted WIFI deauth via menu of seen devices
-1. Asshole mode : mass deauth everthing. wifi and bluetooth.
+1. Asshole mode : mass deauth everything. wifi and bluetooth.
 1. Targeted packet dump
 1. Raw packet dump
 
