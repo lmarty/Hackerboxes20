@@ -75,20 +75,21 @@ void setup()
     Serial.println("initialization failed!");
     return;
   }
+  
  // reset counter
   Serial.println("initialization done.");
-
-  preferences.begin("iotsharing", false);
+  preferences.begin("ninjas", false);
   unsigned int reset_times = preferences.getUInt("reset_times", 0);
-
   /* we have just reset ESP then increase reset_times */
   reset_times++;
-
   Serial.printf("Number of restart times: %d\n", reset_times);
-
+  if (reset_times < 50){
+    Serial.println("amature...");
+  } else {
+    Serial.println("you're going to burn the button out dude");
+  }
   /* Store reset_times to the Preferences */
   preferences.putUInt("reset_times", reset_times);
-
   /* Close the Preferences */
   preferences.end();
   // end resetcounter
@@ -104,19 +105,20 @@ void setup()
 
 
   delay(1000);
+  // TAKES TOO LONG WITH A BIG LIST! //
   /* open our seen ssids file and read it out on the serial */
-  root = SD.open("seen.txt");
-  if (root) {
-    /* read from the file until there's nothing else in it */
-    Serial.println("All the SSIDs in seen.txt");
-    while (root.available()) {
-      /* read the file and print to Terminal */
-      Serial.write(root.read());
-    }
-    root.close();
-  } else {
-    Serial.println("error opening seen.txt from line91");
-  }
+  //root = SD.open("seen.txt");
+  //if (root) {
+  //  /* read from the file until there's nothing else in it */
+  //  Serial.println("All the SSIDs in seen.txt");
+  //  while (root.available()) {
+  //    /* read the file and print to Terminal */
+  //    Serial.write(root.read());
+  //  }
+  //  root.close();
+  //} else {
+  //  Serial.println("error opening seen.txt from line91");
+  //}
 
     // start the screen
   tft.begin();
