@@ -6,6 +6,8 @@
 #include "Adafruit_GFX.h"
 #include "Adafruit_ILI9341.h"
 #include "Adafruit_NeoPixel.h"
+#include <Preferences.h>
+
 
 //DEVICES
 // TFT Values
@@ -44,6 +46,9 @@ const int g7 = 3136;
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_MOSI, TFT_CLK, TFT_RST, TFT_MISO);
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIXELPIN, NEO_GRB + NEO_KHZ800);
 
+/* create an instance of Preferences library */
+Preferences preferences;
+
 // setup our game variables
 char hackers_found[13][70];
 int next_hacker_found = 0;
@@ -70,7 +75,23 @@ void setup()
     Serial.println("initialization failed!");
     return;
   }
+ // reset counter
   Serial.println("initialization done.");
+
+  preferences.begin("iotsharing", false);
+  unsigned int reset_times = preferences.getUInt("reset_times", 0);
+
+  /* we have just reset ESP then increase reset_times */
+  reset_times++;
+
+  Serial.printf("Number of restart times: %d\n", reset_times);
+
+  /* Store reset_times to the Preferences */
+  preferences.putUInt("reset_times", reset_times);
+
+  /* Close the Preferences */
+  preferences.end();
+  // end resetcounter
 
   /* load the root object with the contents of the filesystem "/" */
   root = SD.open("/");
