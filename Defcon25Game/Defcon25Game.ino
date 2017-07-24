@@ -112,11 +112,11 @@ void setup()
 
   //===============deauth =============//
   wifi_set_opmode(STATION_MODE);
-wifi_promiscuous_enable(0);
-WiFi.disconnect();
-wifi_set_promiscuous_rx_cb(sniffer);
-wifi_set_channel(curChannel);
-wifi_promiscuous_enable(1);
+  wifi_promiscuous_enable(0);
+  wifi.disconnect();
+  wifi_set_promiscuous_rx_cb(sniffer);
+  wifi_set_channel(curChannel);
+  wifi_promiscuous_enable(1);
 
 //   pinMode(ledPin, OUTPUT); // find another notifier!!
 
