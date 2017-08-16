@@ -1,4 +1,6 @@
-# MOCKUP #
+# MOCKUP !!!!
+This will change. A lot.  
+
 
 ### Program Execution Flow and Main Menu
  Program flow pseudocode and mock main menusystem layout for our badge. Project goal is to create a collection of useful functions and apps that retains your interest beyond the first weekend of owning it.
