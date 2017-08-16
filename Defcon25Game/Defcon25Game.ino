@@ -75,7 +75,7 @@ void setup()
     Serial.println("initialization failed!");
     return;
   }
-  
+
  // reset counter
   Serial.println("initialization done.");
   preferences.begin("ninjas", false);
@@ -211,7 +211,7 @@ void wifiScan2LCD()
   tft.setCursor(0, 0);
   tft.setTextColor(ILI9341_YELLOW);
   tft.setTextSize(4);
-  tft.println(" Nets Scanned");
+  tft.println(" Active APs");
   tft.setTextColor(ILI9341_GREEN);
   tft.setTextSize(2);
 
@@ -297,7 +297,7 @@ void found2LCD()
   tft.setCursor(0, 0);
   tft.setTextColor(ILI9341_YELLOW);
   tft.setTextSize(4);
-  tft.println(" TAG ur iT");
+  tft.println(" HaX0rz Tagg3d");
   tft.setTextColor(ILI9341_RED);
   tft.setTextSize(2);
   for (int i=0; i<13; i++)
