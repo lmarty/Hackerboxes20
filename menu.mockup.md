@@ -1,25 +1,14 @@
 # !!!! MOCKUP / DRAFT / WIP !!!!
-This doc is my living collection of inspirational features for the badge.  Updates will happen as this is in no way final.  Features/functionality may or may not get built.  
+This doc is my living collection of inspirational features for the badge.  Updates will happen as this is in no way final.  Features/functionality may or may not get built.
 
-If you have an idea and want something to be included, please feel free to submit a PR. Plug in your work and push it on up!  
+If you have an idea and want something to be included, please feel free to submit a PR. Plug in your work and push it on up!
 
 
 ### Program Execution Flow and Main Menu
  Program flow pseudocode and mock main menusystem layout for our badge. Project goal is to create a collection of useful functions and apps that retains your interest beyond the first weekend of owning it.
  From badge to desktop conversation piece, retro game system, lightweight messaging platform, pentest implant and mini-toolbox.
  design principal centers around balance of function, fun and bling.
- Not too much of any of them.  Something oyu can leave at your desk and get a few more kicks out of after the initial glam wears off.
- * Messaging should use local net first, then go to web
- * Messaging service should be ongoing(you made a friend, stay in contact!)
- * Software should be easy to modify and extend
- * all sub menu items and extensibility should follow the same pattern.
- * Functions content belongs in the libs, not the INO.
- * Goal of menu is to be fully functional without being too cluttered
- * Goal of main display loop is to be intuitive and entertaining, without over doing it.
- * Organize with a priority on usefulness
- * Most to least used ordering?
- * Capturing ideas as they come.
-
+ Not too much of any of them.  Something you can leave at your desk and get a few more kicks out of after the initial glam wears off. Or leave in the bushes at your next pentest site
 
 #### Core features
   * Game platform
@@ -127,7 +116,7 @@ interrupt == Break to main menu
 #### TODO :
 - [ ] Frame up the menu structure/content
 - [ ] Code up menu system
-- [ ] Add supporting code for menu items    
+- [ ] Add supporting code for menu items
 - [ ] Validate basic functionality (break loop on interrupt, navigation works, test app launches from it, etc)
 - [ ] Create  OTA mechanism and checker
 - [ ]
@@ -144,3 +133,13 @@ interrupt == Break to main menu
 * lock level 1-10
 * penis
 * Leverage a community menu lib for implementation
+* * Messaging should use local net first, then go to web
+* Messaging service should be ongoing(you made a friend, stay in contact!)
+* Software should be easy to modify and extend
+* all sub menu items and extensibility should follow the same pattern.
+* Functions content belongs in the libs, not the INO.
+* Goal of menu is to be fully functional without being too cluttered
+* Goal of main display loop is to be intuitive and entertaining, without over doing it.
+* Organize with a priority on usefulness
+* Most to least used ordering?
+* Capturing ideas as they come.
